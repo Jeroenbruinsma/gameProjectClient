@@ -16,8 +16,8 @@ export default class Home extends Component {
       [e.target.player]: e.target.value
     })
   }
-  
-  url = 'localhost:3004'
+
+  url = 'localhost:3001'
   hendleLogin = e => {
     e.preventDefault()
     const { player } = this.state
