@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import SignIn from './SignIn'
+import Player from './Player'
 import '../App.css'
 
-export default class HomeContainer extends Component {
+export default class PlayerContainer extends Component {
     render() {
         return (
             <div className="SignIn">
                 <div className="player1">
                     <h1>Player 1</h1>
-                    <SignIn />
+                    <Player />
                 </div>
 
                 <div className="player2">
                     <h1>Player 2</h1>
-                    <SignIn />
+                    <Player />
                 </div>
 
 

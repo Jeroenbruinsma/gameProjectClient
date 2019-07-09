@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
-import player from './player'
 
-export default combineReducers({
-    player
-})
+import users from './users'
+
+export default {
+    users
+}

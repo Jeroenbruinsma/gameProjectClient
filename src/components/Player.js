@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as request from 'superagent'
 
-export default class Home extends Component {
+export default class Player extends Component {
   state = {
     player:
     {
@@ -23,7 +23,7 @@ export default class Home extends Component {
     const { player } = this.state
     this.setState({ player: '' })
     request
-      .post(`${this.url}/player`)
+      .post(`${this.url}/login`)
       .send({ player })
       .then(response => {
         console.log('response:', response)

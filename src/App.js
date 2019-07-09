@@ -1,9 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css'
-import SignInContainer from './components/SignInContainer'
-import Home from './components/Home'
+import SignUpContainer from './components/SignUpContainer'
+import PlayerContainer from './components/PlayerContainer'
+import GameLobbyContainer from './components/GameLobbyContainer'
 import GameContainer from './components/GameContainer'
+
 
 function App() {
   return (
@@ -11,9 +13,10 @@ function App() {
     <BrowserRouter>
     <div>
       <Switch>
-      <Route exact path='/' component={Home} />
-      <Route path='/player' component={SignInContainer} />
-      <Route path='/game' component={GameContainer} />
+      <Route path='/user' component={SignUpContainer} />
+      <Route path='/login' component={PlayerContainer} />
+      <Route exact path='/lobby' component={GameLobbyContainer} />
+      <Route exact path='/game' component={GameContainer} />
       </Switch>
     </div>
     </BrowserRouter>
