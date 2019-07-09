@@ -14,7 +14,7 @@ return {
     payload: error
 }}
 
-const baseUrl = 'http://172.16.29.20:5000'
+const baseUrl = 'http://localhost:3001'
 
 export const signup = (username, password, name, email, password_confirmation) =>(dispatch) => {
     

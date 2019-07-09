@@ -5,7 +5,7 @@ import '../App.css'
 export default class PlayerContainer extends Component {
     render() {
         return (
-            <div className="SignIn">
+            <div className="LogIn">
                 <div className="player1">
                     <h1>Player 1</h1>
                     <Player />

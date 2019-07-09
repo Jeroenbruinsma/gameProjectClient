@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import * as request from 'superagent'
+import { connect } from 'react-redux'
+import { login } from '../actions/player'
 
-export default class Player extends Component {
+class Player extends Component {
   state = {
     player:
     {
-      name: '',
       email: '',
       password: ''
     }
@@ -13,42 +13,27 @@ export default class Player extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.player]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
-  url = 'localhost:3001'
-  hendleLogin = e => {
+  handleLogin = e => {
     e.preventDefault()
-    const { player } = this.state
-    this.setState({ player: '' })
-    request
-      .post(`${this.url}/login`)
-      .send({ player })
-      .then(response => {
-        console.log('response:', response)
-      })
-      .catch(console.error)
+    console.log('logintest', this.state)
+    this.props.login(
+      this.state.email, 
+      this.state.password)
   }
 
   render() {
     return (
-      <div className="user">
+      <div className="player">
         <form>
-          <label>
-            name:
-          <input
-              name="name"
-              type="text"
-              onChange={this.handleChange} />
-          </label>
-          <br />
           <label>
             email:
           <input
               name="email"
               type="text"
-
               onChange={this.handleChange} />
           </label>
           <br />
@@ -65,3 +50,15 @@ export default class Player extends Component {
     )
   }
 }
+
+const mapStateToProps = state => (
+  {
+    player: state.player
+  }
+)
+
+const mapDispatchToProps = { login }
+
+export default connect(mapStateToProps,
+  mapDispatchToProps
+)(Player)
