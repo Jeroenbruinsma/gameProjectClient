@@ -4,11 +4,11 @@ export const EVENT = "EVENT"
 export function onEvent(event) {
     const { data } = event
 
-    const messages = JSON.parse(data)
-    console.log("data", messages)
+    const gameData = JSON.parse(data)
+    console.log("data from onEvent action", gameData)
 
     return {
         type: EVENT,
-        payload: messages
+        payload: gameData
     }
 }
