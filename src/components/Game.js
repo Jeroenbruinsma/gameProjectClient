@@ -50,7 +50,7 @@ export default class Game extends Component {
                     <div id="score"> SCORES: 0 </div>
                     <button onClick={this.reset.bind(this)}>Replay</button>
                     <Teeth />
-                    <img src={CrocImg} alt="croc" className="background" id="croc" />
+                    {/* <img src={CrocImg} alt="croc" className="background" id="croc" /> */}
                 </div>
             </main>
 

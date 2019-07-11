@@ -58,7 +58,7 @@ main{
     z-index: 6;
     max-width: 34%;
     display: block;
-    bottom: 60%;
+    bottom:35%;
     left: 40%;
     background-color: rgba(0, 0, 0, 0.44);
 }
@@ -139,7 +139,7 @@ main{
     z-index: 6;
     max-width: 34%;
     display: block;
-    bottom: 60%;
+    bottom: 25%;
     left: 40%;
     background-color: rgba(0, 0, 0, 0.44);
 }

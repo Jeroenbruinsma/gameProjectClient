@@ -13,6 +13,7 @@ function App() {
 
     <BrowserRouter>
     <div>
+      
       <Switch>
         <Route path='/user' component={SignUpContainer} />
         <Route path='/login' component={PlayerContainer} />

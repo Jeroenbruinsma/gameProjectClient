@@ -12,6 +12,7 @@ export default class Teeth extends Component {
         open: true
     }
 
+
     getImage = () => this.state.open ? 'tooth' : 'hole'
 
     url = 'http://localhost:5000'
@@ -19,6 +20,7 @@ export default class Teeth extends Component {
     onChange = (event) => {
         console.log('toothclicked', event.target.id)
         event.preventDefault()
+
         this.setState(state => ({ open: !state.open }))
 
         request
@@ -32,6 +34,7 @@ export default class Teeth extends Component {
 
 
     render() {
+
     
         console.log("renderteeth", this.props)
         const imageName = this.getImage();
@@ -42,6 +45,7 @@ export default class Teeth extends Component {
         return (
             <div className={this.props.cssLocation}>
                 <img Toothid={this.props.teethproperty.id} id={this.props.teethproperty.id} src={q} onClick={this.onChange} alt='tooth1' className="toothimg" />
+
             </div>
         )
     }

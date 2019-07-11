@@ -77,11 +77,11 @@ class App extends Component {
         {teeth.map(( t ,index) => {
       
           let countindex = index + 1
+
          let cssClassName = "tooth" + countindex + ' tooth'
           return <Teeth teethproperty={t} cssLocation={cssClassName}/>
-         
-
-        // return <div className={cssClassName} id="tooth1"> <img src={q} className="toothimg" alt='' /> </div>
+        
+     
       }
         )}
 
