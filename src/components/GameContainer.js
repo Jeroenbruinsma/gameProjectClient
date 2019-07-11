@@ -4,7 +4,7 @@ import Game from './Game'
 export default class GameContainer extends Component {
     render() {
         return (
-            <div>
+            <div className="playgame">
                 <Game />
             </div>
         )

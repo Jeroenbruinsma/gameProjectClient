@@ -1,0 +1,42 @@
+.croc {
+  background-position: center;
+  position: relative;
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+}
+
+.teeth {
+  position: absolute;
+}
+
+#teeth1 {
+  bottom: 45%;
+    left: 65%;
+}
+#teeth2 {
+  bottom: 39%;
+    left: 75%;
+}
+#teeth3 {
+  
+}
+#teeth4 {
+  
+}
+#teeth5 {
+  
+}
+#teeth6 {
+  
+}
+#teeth7 {
+  
+}
+#teeth8 {
+  
+}
+#teeth9 {
+  
+}
+
