@@ -24,7 +24,6 @@ class App extends Component {
   }
   onSubmit = (event) => {
     event.preventDefault()
-    console.log("onSubmit")
     const { message } = this.state
 
     this.setState({ message: '' })
@@ -33,7 +32,6 @@ class App extends Component {
       .post(this.url + '/message')
       .send({ message })
       .then(response => {
-        console.log("response txt", response)
       })
       .catch(console.error)
   }
@@ -48,7 +46,6 @@ class App extends Component {
       .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
       .send({ "teethId": Toothid })
       .then(response => {
-        console.log("response txt", response)
       })
       .catch(console.error)
   }
@@ -56,7 +53,6 @@ class App extends Component {
   onEvent = (event) => {
     const { data } = event
     const messages = JSON.parse(data)
-    console.log("mess", messages)
     this.setState({ messages })
   }
 
@@ -65,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("render of app called",this.props)
+    //console.log("render of app called",this.props)
     
     if(!this.props.game.GameInfo)
     {
@@ -95,8 +91,6 @@ class App extends Component {
           }
           let countindex = index + 1
          let  cssClassName = "tooth" + countindex + ' tooth'
-          
-
 
         return <div className={cssClassName} id="tooth1"> <img src={q} className="toothimg" alt='' /> </div>
       }
@@ -109,7 +103,6 @@ class App extends Component {
 }
 
 function mapStatetoProps(state) {
-  console.log('MSTP called ', state)
   return {
     game: state.game,
     jwt: state.users
