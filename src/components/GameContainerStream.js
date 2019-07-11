@@ -5,6 +5,7 @@ import { onLoadJWT } from '../actions/user'
 import { connect } from 'react-redux'
 import './GameContainerStream.css'
 import Teeth from './Teeth'
+import {  Redirect} from 'react-router-dom'
 
 
 class App extends Component {
@@ -35,7 +36,7 @@ class App extends Component {
       .send({ "teethId": Toothid })
       .then(response => {
       })
-      .catch(console.error)
+      .catch(err => {console.error("errrri", err)   })
   }
 
   onEvent = (event) => {
@@ -50,7 +51,6 @@ class App extends Component {
 
   render() {
     console.log("render of app called",this.props)
-    
     
     if(!this.props.game.GameInfo)
     {
@@ -67,12 +67,21 @@ class App extends Component {
     console.log("userIds",userIds )
     console.log("got teeth! amount: ", teeth.length)
 
+    if(playerWinner != null){
+      alert("we got a winner! ")
+      console.log("user accepted the winner ")
+      
+      return  <Redirect to='/lobby' />
 
+
+
+
+    }
 
     return (
       
 
-      <main id="main" > <button onClick={this.click}> Lets draw a croc here!</button> 
+      <main id="main" > 
        <img src="./croc_noTeeth.png" className="background" id="croc" alt='' ></img>
         {teeth.map(( t ,index) => {
       

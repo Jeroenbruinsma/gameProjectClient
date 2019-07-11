@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import styles from './GameLobby.css'
+import  './GameLobby.css'
 import { connect } from 'react-redux'
 import { fetchGames } from '../actions/game'
 import request from 'superagent'
+import {  Redirect} from 'react-router-dom'
 
 
 class GameLobby extends Component {
@@ -28,10 +29,18 @@ class GameLobby extends Component {
     clickable = (event) => {
     console.log('clicklable means you can join the game',event.target.id)
     request
-        .put(this.url + `/lobby/${event.target.id}`)
+        .get(this.url + `/lobby/${event.target.id}`)
         .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
         .send({"id": event.target.id})
-        .then(response => {console.log('response.body',response.body)
+        .then(response => {
+            console.log('response.body',response.body)
+            if(response.body.JoinGame){
+                this.setState({redir: true})
+            }
+            if(response.body.command){
+                this.props.fetchGames()
+            }
+        
         })
         .catch(console.error)   
      
@@ -42,20 +51,16 @@ class GameLobby extends Component {
      
     
     renderTableData() {
-        console.log('Can I see U:',this.props.games.Lobby)
         if(!this.props.games.Lobby) {
             return "wating"
         }
         let x =this.props.games.Lobby
-        console.log(x)
-        // if (this.props.games.Lobby.id){
-
-        // }
+       
         return x.map(game => {
             const { id, gameName, gameDetail, status } = game
             
             return (
-                <tr key={game} >
+                <tr key={id} >
                     <td>{id}</td>
                     <td>{gameName}</td>
                     <td>{gameDetail}</td>
@@ -76,6 +81,11 @@ class GameLobby extends Component {
     }
 
     render() {
+
+        console.log("render of the lobby:", this.state)
+        if(this.state.redir)return  <Redirect to='/game' />
+        
+
         return (
             <div>
                 <h1 id='title'>Game Lobby</h1>
