@@ -8,7 +8,8 @@ export const playerLogIn = (login) => {
     payload: login
 }}
 
-const baseUrl = 'http://172.16.29.20:5000'
+const baseUrl = 'http://localhost:5000'
+// http://172.16.29.20:5000
 
 export const login = (email, password) => dispatch => {
     console.log('test5', email)
