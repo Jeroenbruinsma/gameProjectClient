@@ -17,8 +17,8 @@ class App extends Component {
     message: ''
   }
 
-
-  source = new EventSource(this.url + "/game/26")
+  
+  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId")) // make DYNA<MICCC PLEEAAASE
 
   onChange = (event) => {
     const { value } = event.target
@@ -27,7 +27,7 @@ class App extends Component {
   
   click = (event) => {
     event.preventDefault()
-    const Toothid = 36   // TODO make dynamic
+    const Toothid = 36                // TODO make dynamic   do i use this?
     console.log("click funtion called", Toothid)
 
     request
@@ -46,6 +46,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    
     this.source.onmessage = this.props.onEvent
   }
 
@@ -72,15 +73,9 @@ class App extends Component {
       console.log("user accepted the winner ")
       
       return  <Redirect to='/lobby' />
-
-
-
-
     }
 
     return (
-      
-
       <main id="main" > 
        <img src="./croc_noTeeth.png" className="background" id="croc" alt='' ></img>
         {teeth.map(( t ,index) => {

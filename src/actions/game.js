@@ -11,12 +11,6 @@ export const setGames = (games) => {
     }
 }
 
-export function addGame(game) {
-    return {
-        type: ADD_GAME,
-        game
-    }
-}
 
 export const stopGame = (stop) => {
     return {
@@ -28,29 +22,36 @@ export const stopGame = (stop) => {
 const baseUrl = 'http://localhost:5000'
 
 export function fetchGames() {
-    console.log("tokennnnnnnnnn",localStorage.getItem("token"))
+    console.log("tokennnnnnnnnn", localStorage.getItem("token"))
     return dispatch => {
         request
-        .get(`${baseUrl}/lobby`)
-        .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
-        
-            .then(res => { console.log('res',res.body) 
+            .get(`${baseUrl}/lobby`)
+            .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
+
+            .then(res => {
+                console.log('res', res.body)
                 return res.body
             })
             .then(data => {
-                dispatch(setGames(data) )
-             } ) 
-            .catch(err => console.log('err',err))
+                dispatch(setGames(data))
+            })
+            .catch(err => console.log('err', err))
     }
 }
 
 export function saveGame(data) {
+    console.log("saveGameCalled to add a game to the list ", data)
     return dispatch => {
-        request(`${baseUrl}/game`)
-        .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
-        .send()
-        .then(res => {console.log('res48', res.text)})
-        .then(data => dispatch(addGame(data)))
+        request
+            .post(`${baseUrl}/game`)
+            .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
+            .send({
+                "gameName": data
+            }
+            )
+            .then(res => { console.log('res58', res.body)
+            return res })
+            .then(data => dispatch(setGames(data.body)))
     }
 }
 
