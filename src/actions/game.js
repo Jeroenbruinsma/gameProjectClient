@@ -31,7 +31,7 @@ export function fetchGames() {
     console.log("tokennnnnnnnnn",localStorage.getItem("token"))
     return dispatch => {
         request
-        .get(`${baseUrl}/game`)
+        .get(`${baseUrl}/lobby`)
         .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
         
             .then(res => { console.log('res',res.body) 

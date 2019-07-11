@@ -12,8 +12,9 @@ export default class Teeth extends Component {
     state = {
         open: true
     }
-    toggleImage = () => {
-        console.log('click')
+    toggleImage = (event ) => {
+        console.log('click',event)
+        console.log('click',event.target.id)
         this.setState(state => ({ open: !state.open }))
     }
 
@@ -22,35 +23,13 @@ export default class Teeth extends Component {
 
     render() {
         const imageName = this.getImageName();
+        console.log("render of teeth",this.props)
         return (
             <div className="teeth">
                 <div id="teeth1" >
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth1' />
+                    <img src={imagesPath[imageName]} id={this.props.objectProp.id} onClick={this.toggleImage} alt='tooth1' />
                 </div>
-                <div id="teeth2">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth2' />
-                </div>
-                <div id="teeth3">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth3' />
-                </div>
-                <div id="teeth4">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth4' />
-                </div>
-                <div id="teeth5">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth5' />
-                </div>
-                <div id="teeth6">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth6' />
-                </div>
-                <div id="teeth7">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth7' />
-                </div>
-                <div id="teeth8">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth8' />
-                </div>
-                <div id="teeth9">
-                    <img src={imagesPath[imageName]} onClick={this.toggleImage} alt='tooth9' />
-                </div>
+           
             </div>
         )
     }

@@ -4,6 +4,7 @@ import { onEvent } from '../actions/gameStream'
 import { onLoadJWT } from '../actions/user'
 import { connect } from 'react-redux'
 import './GameContainerStream.css'
+import Teeth from './Teeth'
 
 
 class App extends Component {
@@ -91,8 +92,8 @@ class App extends Component {
           }
           let countindex = index + 1
          let  cssClassName = "tooth" + countindex + ' tooth'
-
-        return <div className={cssClassName} id="tooth1"> <img src={q} className="toothimg" alt='' /> </div>
+         return <Teeth objectProp={t} />
+        //return <div className={cssClassName} id="tooth1"> <img src={q} className="toothimg" alt='' /> </div>
       }
         )}
 
