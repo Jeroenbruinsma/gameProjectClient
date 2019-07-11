@@ -29,7 +29,6 @@ export default class Teeth extends Component {
                 <div id="teeth1" >
                     <img src={imagesPath[imageName]} id={this.props.objectProp.id} onClick={this.toggleImage} alt='tooth1' />
                 </div>
-           
             </div>
         )
     }

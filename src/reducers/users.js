@@ -4,7 +4,8 @@ export default function users(state = [], action = {}) {
 
   switch (action.type) {
     case USER_SIGNUP:
-      return action.payload
+      console.log("Usersingup users reducers",action)
+      return action.payload.body
     case USER_SIGNUP_FAIL:
       return action.payload
     case USER_GET_JWT:

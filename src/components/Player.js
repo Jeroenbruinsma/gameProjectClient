@@ -21,32 +21,37 @@ class Player extends Component {
     e.preventDefault()
     console.log('logintest', this.state)
     this.props.login(
-      this.state.email, 
+      this.state.email,
       this.state.password)
   }
 
   render() {
     return (
-      <div className="player">
-        <form>
-          <label>
-            email:
-          <input
+      <main id="main" >
+        <img src="./croc_noTeeth.png" class="background" id="croc" alt=""></img>
+        <div className="userLogin">
+          <form id="newUser">
+            <label id="username">        email:  </label>
+            <input
               name="email"
               type="text"
-              onChange={this.handleChange} />
-          </label>
-          <br />
-          <label>
-            password:
-          <input
+              onfocus="this.value=''"
+              onChange={this.handleChange}
+              id="usernameField" />
+
+            <label id="password">  password: </label>
+
+            <input
               name="password"
               type="text"
-              onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Log In" onClick={this.handleLogin} />
-        </form>
-      </div>
+              onfocus="this.value=''"
+              onChange={this.handleChange}
+              id="passwordField" />
+
+            <input type="submit" value="Log In" onClick={this.handleLogin} />
+          </form>
+        </div>
+      </main>
     )
   }
 }

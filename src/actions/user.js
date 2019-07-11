@@ -35,9 +35,10 @@ export const signup = (username, password, name, email, password_confirmation) =
         .send({ username, password, name, email, password_confirmation })
         .then(
             res => {
-                console.log('res', res)
+                console.log('res', res.body)
                 console.log("token is:", res.body.jwt)
                 localStorage.setItem('token', res.body.jwt);
+                
                 dispatch(userSignup(res))
 
             },
