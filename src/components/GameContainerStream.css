@@ -1,0 +1,145 @@
+.background {
+    width: 100%;
+    position: relative;
+}   
+
+main{
+   position: relative;
+}
+.toothimg{
+    max-width: 71%;
+
+}
+.holeimg{
+    max-width: 71%;
+
+}
+.tooth{
+    width: 8%;
+    position: absolute;
+    z-index: 2;
+    visibility: visible;
+    max-width: 11%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tooth1{
+    bottom: 45%;
+    left: 65%;
+ }
+.tooth2{    
+    bottom: 39%;
+    left: 75%;
+}
+.tooth3{   
+    bottom: 25%;
+    left: 79%;
+}
+
+.tooth4{   
+    bottom: 16%;
+    left: 68%;
+}
+.tooth5{   
+    bottom: 17%;
+    left: 55%;
+}
+.tooth6{   
+    bottom: 29%;
+    left: 44%;
+}
+.userLogin{
+    position: absolute;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    width: 36%;
+
+    z-index: 6;
+    max-width: 34%;
+    display: block;
+    bottom: 60%;
+    left: 40%;
+    background-color: rgba(0, 0, 0, 0.44);
+}
+#username{
+    position: relative;
+    font-size: 3rem;
+    color: white;
+}
+
+#usernameField{
+    position: relative;
+    height: 2rem;
+    background-color: transparent;
+    border-radius: 45px;
+    text-indent: 21px;
+}
+#password{
+    position: relative;
+    font-size: 3rem;
+    color: white;
+}
+#password2{
+    position: relative;
+    font-size: 3rem;
+    color: white;
+}
+#passwordField{
+    position: relative;
+    height: 2rem;
+    background-color: transparent;
+    border-radius: 45px;
+    text-indent: 21px;
+
+}
+#passwordField2{
+    position: relative;
+    height: 2rem;
+    background-color: transparent;
+    border-radius: 45px;
+    text-indent: 21px;
+
+}
+#submitExistingUser{
+    position: relative;
+    width: 13vw;
+    height: 3vw;
+    margin-top: 12px;
+    font-size: 2rem;
+}
+#existingUser{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+#submitNewUser{
+    position: relative;
+    width: 13vw;
+    height: 3vw;
+    margin-top: 12px;
+    font-size: 2rem;
+}
+#newUser{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+.newUser{
+    position: absolute;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    width: 36%;
+
+    z-index: 6;
+    max-width: 34%;
+    display: block;
+    bottom: 60%;
+    left: 40%;
+    background-color: rgba(0, 0, 0, 0.44);
+}
