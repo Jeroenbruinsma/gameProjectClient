@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styles from './GameLobby.css'
 import { connect } from 'react-redux'
-import { fetchGames, saveGame } from '../actions/game'
+import { fetchGames } from '../actions/game'
+import request from 'superagent'
 
 
 class GameLobby extends Component {
@@ -16,7 +17,6 @@ class GameLobby extends Component {
             }]
         }
         this.renderTableData = this.renderTableData.bind(this)
-        this.handleChange = this.handleChange.bind(this)
     }
     
     componentDidMount() {
@@ -24,30 +24,43 @@ class GameLobby extends Component {
         this.props.fetchGames()
     }
 
-    handleChange= (e) => {
-        console.log('join')
-    }   
+
+    clickable = (event) => {
+    console.log('clicklable means you can join the game',event.target.id)
+    request
+        .put(this.url + `/lobby/${event.target.id}`)
+        .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
+        .send({"id": event.target.id})
+        .then(response => {console.log('response.body',response.body)
+        })
+        .catch(console.error)   
+     
+    }
+
+    url = 'http://localhost:5000'
+
+     
     
     renderTableData() {
-        console.log('games:',this.props.games)
-        console.log('Lobby:',this.props.games.Lobby)
+        console.log('Can I see U:',this.props.games.Lobby)
         if(!this.props.games.Lobby) {
             return "wating"
         }
         let x =this.props.games.Lobby
         console.log(x)
+        // if (this.props.games.Lobby.id){
+
+        // }
         return x.map(game => {
             const { id, gameName, gameDetail, status } = game
             
             return (
-           
-                
                 <tr key={game} >
                     <td>{id}</td>
                     <td>{gameName}</td>
                     <td>{gameDetail}</td>
                     <td>{status}</td>
-                    <td> <button onClick={this.handleChange}>JOIN</button></td>
+                    <td> <button id={id} onClick={this.clickable}>JOIN</button></td>
                 </tr>
             
             )
@@ -58,7 +71,7 @@ class GameLobby extends Component {
         console.log('header',this.state.games)
         let header = Object.keys(this.state.games[0])
         return header.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
+            return <th property={key}>{key.toUpperCase()}</th>
         })
     }
 

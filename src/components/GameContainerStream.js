@@ -23,20 +23,7 @@ class App extends Component {
     const { value } = event.target
     this.setState({ message: value })
   }
-  onSubmit = (event) => {
-    event.preventDefault()
-    const { message } = this.state
-
-    this.setState({ message: '' })
-
-    request
-      .post(this.url + '/message')
-      .send({ message })
-      .then(response => {
-      })
-      .catch(console.error)
-  }
-
+  
   click = (event) => {
     event.preventDefault()
     const Toothid = 36   // TODO make dynamic
@@ -64,6 +51,7 @@ class App extends Component {
   render() {
     console.log("render of app called",this.props)
     
+    
     if(!this.props.game.GameInfo)
     {
       return "Wait for the data to be fetched"
@@ -82,22 +70,22 @@ class App extends Component {
 
 
     return (
+      
 
       <main id="main" > <button onClick={this.click}> Lets draw a croc here!</button> 
        <img src="./croc_noTeeth.png" className="background" id="croc" alt='' ></img>
-        {teeth.map(( t,index) => {
-         let q = 'tooth.png'
-         if(t.clicked) {
-            q = "hole.png"
-          }
+        {teeth.map(( t ,index) => {
+      
           let countindex = index + 1
-         let  cssClassName = "tooth" + countindex + ' tooth'
-         return <Teeth objectProp={t} />
-        //return <div className={cssClassName} id="tooth1"> <img src={q} className="toothimg" alt='' /> </div>
+
+         let cssClassName = "tooth" + countindex + ' tooth'
+          return <Teeth teethproperty={t} cssLocation={cssClassName}/>
+        
+     
       }
         )}
 
-      
+
       </main>  
     )
   }
