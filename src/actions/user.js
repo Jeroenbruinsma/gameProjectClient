@@ -28,9 +28,6 @@ export const onLoadJWT = (jwt) => {
 const baseUrl = 'http://localhost:5000' // link for Jeroen
 
 
-const baseUrl = 'http://localhost:5000'
-
-
 export const signup = (username, password, name, email, password_confirmation) => (dispatch) => {
 
     request
