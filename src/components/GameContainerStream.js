@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    //console.log("render of app called",this.props)
+    console.log("render of app called",this.props)
     
     if(!this.props.game.GameInfo)
     {
@@ -103,8 +103,9 @@ class App extends Component {
 }
 
 function mapStatetoProps(state) {
+  console.log('mapstateprops',state)
   return {
-    game: state.game,
+    game: state.gameStream,
     jwt: state.users
   }
 }
