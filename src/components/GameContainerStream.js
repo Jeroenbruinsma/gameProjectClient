@@ -5,6 +5,7 @@ import { onLoadJWT } from '../actions/user'
 import { connect } from 'react-redux'
 import './GameContainerStream.css'
 import Teeth from './Teeth'
+import {  Redirect} from 'react-router-dom'
 
 
 class App extends Component {
@@ -16,8 +17,8 @@ class App extends Component {
     message: ''
   }
 
-
-  source = new EventSource(this.url + "/game/26")
+  
+  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId")) // make DYNA<MICCC PLEEAAASE
 
   onChange = (event) => {
     const { value } = event.target
@@ -26,7 +27,7 @@ class App extends Component {
   
   click = (event) => {
     event.preventDefault()
-    const Toothid = 36   // TODO make dynamic
+    const Toothid = 36                // TODO make dynamic   do i use this?
     console.log("click funtion called", Toothid)
 
     request
@@ -35,7 +36,7 @@ class App extends Component {
       .send({ "teethId": Toothid })
       .then(response => {
       })
-      .catch(console.error)
+      .catch(err => {console.error("errrri", err)   })
   }
 
   onEvent = (event) => {
@@ -45,12 +46,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    
     this.source.onmessage = this.props.onEvent
   }
 
   render() {
     console.log("render of app called",this.props)
-    
     
     if(!this.props.game.GameInfo)
     {
@@ -67,12 +68,15 @@ class App extends Component {
     console.log("userIds",userIds )
     console.log("got teeth! amount: ", teeth.length)
 
-
+    if(playerWinner != null){
+      alert("we got a winner! ")
+      console.log("user accepted the winner ")
+      
+      return  <Redirect to='/lobby' />
+    }
 
     return (
-      
-
-      <main id="main" > <button onClick={this.click}> Lets draw a croc here!</button> 
+      <main id="main" > 
        <img src="./croc_noTeeth.png" className="background" id="croc" alt='' ></img>
         {teeth.map(( t ,index) => {
       

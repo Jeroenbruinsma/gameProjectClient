@@ -8,8 +8,6 @@ class PlayerContainer extends Component {
 
 
     render() {
-
-
         console.log("do redir?" , this.props.player.players.jwt)
         if(this.props.player.players.jwt){
           console.log("do a redir to login")
