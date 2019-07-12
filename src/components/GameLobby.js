@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import styles from './GameLobby.css'
+import './GameLobby.css'
 import { connect } from 'react-redux'
 import { fetchGames } from '../actions/game'
 import request from 'superagent'
-
+import LobbyButton from './LobbyButton';
 
 class GameLobby extends Component {
     constructor(props) {
@@ -31,16 +31,16 @@ class GameLobby extends Component {
         .put(this.url + `/lobby/${event.target.id}`)
         .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
         .send({"id": event.target.id})
-        .then(response => {console.log('response.body',response.body)
+        .then(res => 
+            {
         })
         .catch(console.error)   
      
     }
 
+
     url = 'http://localhost:5000'
 
-     
-    
     renderTableData() {
         console.log('Can I see U:',this.props.games.Lobby)
         if(!this.props.games.Lobby) {
@@ -60,7 +60,7 @@ class GameLobby extends Component {
                     <td>{gameName}</td>
                     <td>{gameDetail}</td>
                     <td>{status}</td>
-                    <td> <button id={id} onClick={this.clickable}>JOIN</button></td>
+                    <td><LobbyButton id={id}/></td>
                 </tr>
             
             )
@@ -98,7 +98,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { fetchGames }
+const mapDispatchToProps = { 
+    fetchGames
+}
 
 export default connect(mapStateToProps,
     mapDispatchToProps

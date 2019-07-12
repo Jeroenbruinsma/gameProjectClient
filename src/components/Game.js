@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './game.css'
-import CrocImg from './croc_noTeeth.png'
+import './croc_noTeeth.png'
 import Teeth from './Teeth'
 
 export default class Game extends Component {

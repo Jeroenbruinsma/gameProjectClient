@@ -4,7 +4,6 @@ import './App.css'
 import SignUpContainer from './components/SignUpContainer'
 import PlayerContainer from './components/PlayerContainer'
 import GameLobbyContainer from './components/GameLobbyContainer'
-import GameContainer from './components/GameContainer'
 import GameContainerStream from './components/GameContainerStream'
 
 
@@ -13,13 +12,11 @@ function App() {
 
     <BrowserRouter>
     <div>
-      
       <Switch>
-        <Route path='/user' component={SignUpContainer} />
+        <Route exact path='/' component={SignUpContainer} />
         <Route path='/login' component={PlayerContainer} />
-        <Route exact path='/lobby' component={GameLobbyContainer} />
-        <Route exact path='/game' component={GameContainer} />
-        <Route exact path='/' component={GameContainerStream}/>
+        <Route path='/lobby' component={GameLobbyContainer} />
+        <Route path='/game' component={GameContainerStream}/>
       </Switch>
     </div>
     </BrowserRouter>
