@@ -36,7 +36,7 @@ export default class Teeth extends Component {
     render() {
 
     
-        console.log("renderteeth", this.props)
+        //console.log("renderteeth", this.props)
         const imageName = this.getImage();
         let q = 'tooth.png'
         if(this.props.teethproperty.clicked) {
