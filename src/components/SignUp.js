@@ -105,7 +105,6 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("fffffffffffffffffffffffffffffffffffffffff",state)    
  
   return {
       signupResult: state.users,

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './GameLobby.css'
 import { connect } from 'react-redux'
 import { fetchGames, saveGame } from '../actions/game'
+import {clearGameState} from '../actions/gameStream'
+
 import request from 'superagent'
 import { Redirect } from 'react-router-dom'
 
@@ -18,8 +20,9 @@ class GameLobby extends Component {
     }
 
     componentDidMount() {
-        console.log('this?props?', this.props)
+       // console.log('this?props?', this.props)
         this.props.fetchGames()
+        this.props.clearGameState()
     }
 
 
@@ -39,19 +42,23 @@ class GameLobby extends Component {
 
 
     clickable = (event) => {
-        console.log('clicklable means you can join the game', event.target.id)
+       // console.log('clicklable means you can join the game', event.target.id).log
+        console.log("trying to empty gamestream", this.state)
+        
+
         request
             .get(this.url + `/lobby/${event.target.id}`)
             .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
             .send({ "id": event.target.id })
             .then(response => {
-                console.log('response.body', response.body)
+                //console.log('response.body', response.body)
                 if (response.body.JoinGame) {
                     localStorage.setItem('gamePlayId', response.body.JoinGame)
                     this.setState({ redir: true })
                 }
                 if (response.body.command) {
                     this.props.fetchGames()
+                    this.props.clearGameState()
                 }
 
             })
@@ -86,7 +93,7 @@ class GameLobby extends Component {
         )
     }
     renderTableHeader() {
-        console.log('header', this.state.games)
+        //console.log('header', this.state.games)
         let header = Object.keys(this.state.games[0])
         return header.map((key, index) => {
             return <th property={key}>{key.toUpperCase()}</th>
@@ -95,7 +102,7 @@ class GameLobby extends Component {
 
     render() {
 
-        console.log("render of the lobby:", this.state)
+       // console.log("render of the lobby:", this.state)
         if (this.state.redir) {
             return <Redirect to='/game' />
         }
@@ -108,7 +115,7 @@ class GameLobby extends Component {
                         {this.renderTableHeader()}
                         {this.renderTableData()}
                     </tbody>
-                </table>
+                </table> 
                 <form id="newGame">
                     <label id="newgame"> Name for a new game: </label>
                     <input
@@ -132,8 +139,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { fetchGames, saveGame }
+const mapDispatchToProps = { fetchGames, saveGame  , clearGameState}
 
 export default connect(mapStateToProps,
     mapDispatchToProps
-)(GameLobby)
+)(GameLobby) 

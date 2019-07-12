@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as request from 'superagent'
-import { onEvent } from '../actions/gameStream'
+import { onEvent , clearGameState } from '../actions/gameStream'
+
 import { onLoadJWT } from '../actions/user'
 import { connect } from 'react-redux'
 import './GameContainerStream.css'
@@ -18,7 +19,7 @@ class App extends Component {
   }
 
   
-  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId")) // make DYNA<MICCC PLEEAAASE
+  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId")) 
 
   onChange = (event) => {
     const { value } = event.target
@@ -40,19 +41,40 @@ class App extends Component {
   }
 
   onEvent = (event) => {
+    console.log('onEvent in GCS called W;', event)
     const { data } = event
     const messages = JSON.parse(data)
     this.setState({ messages })
   }
+  UNSAFE_componentWillMount(){
+
+    console.log('component will mound' ,localStorage.getItem("gamePlayId") )
+  }
+
 
   componentDidMount() {
     
     this.source.onmessage = this.props.onEvent
   }
 
+  componentWillUnmount(){
+    console.log("CompoentcomponentWillUnmount")
+    this.source = null
+    console.log('source',this.source)
+  }
+
   render() {
-    console.log("render of app called",this.props)
+    console.log("render of app GCMSTREAM called",this.props)
     
+    if(this.state.doRedir){
+      alert("we got a winner! ")
+      console.log("user accepted the winner ")
+      this.props.clearGameState()
+      console.log(" in lockalstate redir ")
+      return  <Redirect to='/lobby' />
+    }
+
+
     if(!this.props.game.GameInfo)
     {
       return "Wait for the data to be fetched"
@@ -68,12 +90,20 @@ class App extends Component {
     console.log("userIds",userIds )
     console.log("got teeth! amount: ", teeth.length)
 
-    if(playerWinner != null){
-      alert("we got a winner! ")
-      console.log("user accepted the winner ")
-      
-      return  <Redirect to='/lobby' />
+    console.log("winning line: ",playerWinner ,
+     "gameid" , id , 
+     "gameid from LS  " , localStorage.getItem("gamePlayId"))
+
+    if(playerWinner != null  && id ===  Number(localStorage.getItem("gamePlayId"))) {
+      console.log("here i go when i have winner:")
+      console.log("playeriwnner",playerWinner)
+      console.log("locstorage",localStorage.getItem("gamePlayId"))
+      console.log("id",id )
+      this.setState({
+        doRedir: true
+      })
     }
+   
 
     return (
       <main id="main" > 
@@ -95,6 +125,9 @@ class App extends Component {
   }
 }
 
+
+
+
 function mapStatetoProps(state) {
   console.log('mapstateprops',state)
   return {
@@ -103,6 +136,6 @@ function mapStatetoProps(state) {
   }
 }
 
-const mapDispatchtoProps = { onEvent, onLoadJWT }
+const mapDispatchtoProps = { onEvent, onLoadJWT, clearGameState}
 
 export default connect(mapStatetoProps, mapDispatchtoProps)(App)
