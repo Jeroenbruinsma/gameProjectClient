@@ -61,8 +61,8 @@ class GameLobby extends Component {
 
     }
 
-    url = 'http://localhost:5000'
-
+   // url = 'http://localhost:5000'
+    url = 'https://fast-hamlet-62013.herokuapp.com/:40623'
 
 
     renderTableData() {

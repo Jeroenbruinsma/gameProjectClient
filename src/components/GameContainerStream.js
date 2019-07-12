@@ -11,8 +11,10 @@ import { Redirect } from 'react-router-dom'
 
 
 class App extends Component {
-  url = 'http://localhost:5000'
+  url = 'https://fast-hamlet-62013.herokuapp.com/:40623'
+  //url = 'http://localhost:5000'
   //url =  'https://still-shelf-90156.herokuapp.com'
+  
 
   state = {
     messages: [],

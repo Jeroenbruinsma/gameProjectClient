@@ -19,7 +19,8 @@ export const stopGame = (stop) => {
     }
 }
 
-const baseUrl = 'http://localhost:5000'
+//const baseUrl = 'http://localhost:5000'
+const baseUrl = 'https://fast-hamlet-62013.herokuapp.com/:40623'
 
 export function fetchGames() {
     return dispatch => {

@@ -35,7 +35,8 @@ export const winner = (data) => {
 
 
 //const baseUrl = 'http://localhost:3001'
-const baseUrl = 'http://localhost:5000' // link for Jeroen
+//const baseUrl = 'http://localhost:5000' // link for Jeroen
+const baseUrl = 'https://fast-hamlet-62013.herokuapp.com/:40623' // link for heroku
 
 
 export const signup = (username, password, name, email, password_confirmation) => (dispatch) => {

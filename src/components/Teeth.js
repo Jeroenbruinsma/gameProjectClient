@@ -10,8 +10,9 @@ export default class Teeth extends Component {
 
     getImage = () => this.state.open ? 'tooth' : 'hole'
 
-    url = 'http://localhost:5000'
-
+    //url = 'http://localhost:5000'
+    url = 'https://fast-hamlet-62013.herokuapp.com/:40623'
+    
     onChange = (event) => {
         console.log('toothclicked!', event.target.id)
         event.preventDefault()
