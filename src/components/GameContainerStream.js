@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import * as request from 'superagent'
-import { onEvent , clearGameState } from '../actions/gameStream'
+import { onEvent, clearGameState } from '../actions/gameStream'
 
 import { onLoadJWT } from '../actions/user'
 import { connect } from 'react-redux'
 import './GameContainerStream.css'
 import Teeth from './Teeth'
-import {  Redirect} from 'react-router-dom'
+import WinnerComponent from './WinnerComponent'
+import { Redirect } from 'react-router-dom'
 
 
 class App extends Component {
@@ -18,14 +19,14 @@ class App extends Component {
     message: ''
   }
 
-  
-  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId")) 
+
+  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId"))
 
   onChange = (event) => {
     const { value } = event.target
     this.setState({ message: value })
   }
-  
+
   click = (event) => {
     event.preventDefault()
     const Toothid = 36                // TODO make dynamic   do i use this?
@@ -37,7 +38,7 @@ class App extends Component {
       .send({ "teethId": Toothid })
       .then(response => {
       })
-      .catch(err => {console.error("errrri", err)   })
+      .catch(err => { console.error("errrri", err) })
   }
 
   onEvent = (event) => {
@@ -46,81 +47,66 @@ class App extends Component {
     const messages = JSON.parse(data)
     this.setState({ messages })
   }
-  UNSAFE_componentWillMount(){
-
-    console.log('component will mound' ,localStorage.getItem("gamePlayId") )
+  UNSAFE_componentWillMount() {
+    console.log('component will mound', localStorage.getItem("gamePlayId"))
   }
 
 
   componentDidMount() {
-    
+    console.log("comp did mount" , this.props)
     this.source.onmessage = this.props.onEvent
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log("CompoentcomponentWillUnmount")
     this.source = null
-    console.log('source',this.source)
+    console.log('source', this.source)
   }
 
   render() {
-    console.log("render of app GCMSTREAM called",this.props)
-    
-    if(this.state.doRedir){
-      alert("we got a winner! ")
-      console.log("user accepted the winner ")
-      this.props.clearGameState()
+    let link = "./croc_noTeeth.png"
+    if (this.state.doRedir) {
+      /////////////////////////////////////////this.props.clearGameState()
       console.log(" in lockalstate redir ")
-      return  <Redirect to='/lobby' />
     }
-
-
-    if(!this.props.game.GameInfo)
-    {
+    if (!this.props.game.GameInfo) {
       return "Wait for the data to be fetched"
     }
-    
-    const {id, gameName , playerWinner,status,turn,userIds } = this.props.game.GameInfo
-    const {teeth} = this.props.game
-    console.log("GameName:",gameName )
-    console.log("GameID",id )
-    console.log("playerWinner",playerWinner )
-    console.log("status",status )
-    console.log("turn",turn )
-    console.log("userIds",userIds )
+
+    const { id, gameName, playerWinner, status, turn, userIds } = this.props.game.GameInfo
+    const { teeth } = this.props.game
+    console.log("GameName:", gameName)
+    console.log("GameID", id)
+    console.log("playerWinner", playerWinner)
+    console.log("status", status)
+    console.log("turn", turn)
+    console.log("userIds", userIds)
     console.log("got teeth! amount: ", teeth.length)
 
-    console.log("winning line: ",playerWinner ,
-     "gameid" , id , 
-     "gameid from LS  " , localStorage.getItem("gamePlayId"))
-
-    if(playerWinner != null  && id ===  Number(localStorage.getItem("gamePlayId"))) {
-      console.log("here i go when i have winner:")
-      console.log("playeriwnner",playerWinner)
-      console.log("locstorage",localStorage.getItem("gamePlayId"))
-      console.log("id",id )
-      this.setState({
-        doRedir: true
-      })
+    //winner render! 
+    if (playerWinner != null && id === Number(localStorage.getItem("gamePlayId"))) {
+      console.log("trigger setstate doredir")
+      link = "./croc_closed.png"
+      return (         <main id="main" >
+          <WinnerComponent winner={playerWinner}/>
+          <img src={link} className="background" id="croc" alt='' ></img>
+        </main>
+      )
     }
-   
 
     return (
-      <main id="main" > 
-       <img src="./croc_noTeeth.png" className="background" id="croc" alt='' ></img>
-        {teeth.map(( t ,index) => {
-      
-          let countindex = index + 1
-
-         let cssClassName = "tooth" + countindex + ' tooth'
-          return <Teeth teethproperty={t} cssLocation={cssClassName}/>
+      <main id="main" >
+        <img src={link} className="background" id="croc" alt='' ></img>
         
-     
-      }
+        {teeth.map((t, index) => {
+          let countindex = index + 1
+          let cssClassName = "tooth" + countindex + ' tooth'
+          return <Teeth teethproperty={t} cssLocation={cssClassName} />
+        }
         )}
 
 
-      </main>  
+      </main>
     )
   }
 }
@@ -129,13 +115,13 @@ class App extends Component {
 
 
 function mapStatetoProps(state) {
-  console.log('mapstateprops',state)
+  //console.log('mapstateprops',state)
   return {
     game: state.gameStream,
     jwt: state.users
   }
 }
 
-const mapDispatchtoProps = { onEvent, onLoadJWT, clearGameState}
+const mapDispatchtoProps = { onEvent, onLoadJWT, clearGameState }
 
 export default connect(mapStatetoProps, mapDispatchtoProps)(App)

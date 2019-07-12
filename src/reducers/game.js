@@ -7,7 +7,6 @@ import { SET_GAMES, ADD_GAME, CLEAR_EVENT } from '../actions/game'
     //console.log("reducer for Games state", state)
         switch (action.type) {
             case SET_GAMES:
-                console.log("reducer", action)
                 return action.games
             case ADD_GAME:
                 return [...state.Lobby]

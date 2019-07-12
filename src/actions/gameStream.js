@@ -14,7 +14,6 @@ export function onEvent(event) {
     }
 }
 export function clearGameState() {
-    console.log(" clearGameState action", )
 
     return {
         type: CLEAR_EVENT,

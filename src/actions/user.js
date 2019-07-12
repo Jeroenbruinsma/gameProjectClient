@@ -3,6 +3,8 @@ import request from 'superagent'
 export const USER_SIGNUP = 'USER_SIGNUP'
 export const USER_SIGNUP_FAIL = 'USER_SIGNUP_FAIL'
 export const USER_GET_JWT = 'USER_GET_JWT'
+export const USER_WINNER = 'USER_WINNER'
+
 
 export const userSignup = (login) => {
     return {
@@ -22,6 +24,14 @@ export const onLoadJWT = (jwt) => {
         payload: jwt
     }
 }
+export const winner = (data) => {
+    return {
+        type: USER_WINNER,
+        payload: data
+    }
+}
+
+
 
 
 //const baseUrl = 'http://localhost:3001'
@@ -35,17 +45,30 @@ export const signup = (username, password, name, email, password_confirmation) =
         .send({ username, password, name, email, password_confirmation })
         .then(
             res => {
-                console.log('res', res.body)
-                console.log("token is:", res.body.jwt)
                 localStorage.setItem('token', res.body.jwt);
                 
                 dispatch(userSignup(res))
 
             },
             err => {
-                console.log('res2', err)
                 dispatch(userSignupFail(err))
             }
         )
 }
 
+
+
+export const winnerUser = (winnerId) => (dispatch) => {
+
+    request
+        .get(`${baseUrl}/user`)
+        .send({ winnerId })
+        .then(
+            res => {
+                console.log("result from winner action" , res.body.winner)
+                dispatch(winner(res.body.winner))
+
+            },
+           
+        )
+}

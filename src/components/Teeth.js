@@ -21,7 +21,7 @@ export default class Teeth extends Component {
             .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
             .send({ teethId: event.target.id })
             .then(response => {
-                console.log('response test:', response)
+                //console.log('response test:', response)
             })
             .catch(console.error)
     }
