@@ -1,4 +1,5 @@
 import request from 'superagent'
+import {baseUrl} from '../constants'
 
 export const PLAYER_LOGIN= 'PLAYER_LOGIN'
 
@@ -8,8 +9,6 @@ export const playerLogIn = (login) => {
     payload: login
 }}
 
-//const baseUrl = 'http://localhost:5000'
-const baseUrl = 'https://fast-hamlet-62013.herokuapp.com/:40623'
 
 
 export const login = (email, password) => dispatch => {

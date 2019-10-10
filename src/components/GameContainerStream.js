@@ -7,13 +7,11 @@ import { connect } from 'react-redux'
 import './GameContainerStream.css'
 import Teeth from './Teeth'
 import WinnerComponent from './WinnerComponent'
-import { Redirect } from 'react-router-dom'
+import { baseUrl } from '../constants'
+
 
 
 class App extends Component {
-  url = 'https://fast-hamlet-62013.herokuapp.com/:40623'
-  //url = 'http://localhost:5000'
-  //url =  'https://still-shelf-90156.herokuapp.com'
   
 
   state = {
@@ -22,7 +20,7 @@ class App extends Component {
   }
 
 
-  source = new EventSource(this.url + "/game/" + localStorage.getItem("gamePlayId"))
+  source = new EventSource(baseUrl + "/game/" + localStorage.getItem("gamePlayId"))
 
   onChange = (event) => {
     const { value } = event.target
@@ -103,7 +101,7 @@ class App extends Component {
         {teeth.map((t, index) => {
           let countindex = index + 1
           let cssClassName = "tooth" + countindex + ' tooth'
-          return <Teeth teethproperty={t} cssLocation={cssClassName} />
+          return <Teeth teethproperty={t} cssLocation={cssClassName} key={t.id} />
         }
         )}
 

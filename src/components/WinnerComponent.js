@@ -24,7 +24,8 @@ import { connect } from 'react-redux'
 
     componentDidMount() {
         console.log("comp did mount" , this.props)
-        this.props.winnerUser(84)
+        console.log('component dm winner', localStorage.getItem("gamePlayId"))
+        this.props.winnerUser(localStorage.getItem("gamePlayId"))
       }
 
     

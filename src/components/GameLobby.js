@@ -6,6 +6,7 @@ import { clearGameState } from '../actions/gameStream'
 
 import request from 'superagent'
 import { Redirect } from 'react-router-dom'
+import { baseUrl } from '../constants'
 
 
 class GameLobby extends Component {
@@ -42,7 +43,7 @@ class GameLobby extends Component {
 
     clickable = (event) => {
         request
-            .get(this.url + `/lobby/${event.target.id}`)
+            .get(baseUrl + `/lobby/${event.target.id}`)
             .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
             .send({ "id": event.target.id })
             .then(response => {
@@ -61,9 +62,7 @@ class GameLobby extends Component {
 
     }
 
-   // url = 'http://localhost:5000'
-    url = 'https://fast-hamlet-62013.herokuapp.com/:40623'
-
+   
 
     renderTableData() {
         if (!this.props.games.Lobby) {
@@ -79,7 +78,7 @@ class GameLobby extends Component {
                 <tr key={id} >
                     <td>{id}</td>
                     <td>{gameName}</td>
-                    <td>{gameDetail}</td>
+                    {/* <td>{gameDetail}</td> */}
                     <td>{status}</td>
                     <td> <button id={id} onClick={this.clickable}>JOIN</button></td>
                 </tr>
@@ -92,10 +91,10 @@ class GameLobby extends Component {
             return "wait"
         }
         if (this.props.games.Lobby.length > 0) {
-            console.log("MINI", this.props.games.Lobby.length)
             let header = Object.keys(this.props.games.Lobby[0])
+            header.push('Join')
             return header.map((key, index) => {
-                return <th property={key}>{key.toUpperCase()}</th>
+                return <th property={key} key={key}>{key.toUpperCase()}</th>
             })
         }
     }

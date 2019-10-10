@@ -11,6 +11,7 @@ export default function users(state = [], action = {}) {
     case USER_GET_JWT:
         return localStorage.getItem("token")
     case USER_WINNER:
+      console.log("USER_WINNER red", state, "pl", action.payload)
         return [ ...state , action.payload]
 
     default:

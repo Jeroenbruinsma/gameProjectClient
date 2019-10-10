@@ -1,4 +1,5 @@
 import request from 'superagent'
+import {baseUrl} from '../constants'
 
 export const STOP_GAME = 'STOP_GAME'
 export const SET_GAMES = 'SET_GAMES'
@@ -19,8 +20,7 @@ export const stopGame = (stop) => {
     }
 }
 
-//const baseUrl = 'http://localhost:5000'
-const baseUrl = 'https://fast-hamlet-62013.herokuapp.com/:40623'
+
 
 export function fetchGames() {
     return dispatch => {
@@ -33,6 +33,8 @@ export function fetchGames() {
                 return res.body
             })
             .then(data => {
+                //console.log("DATADAT is ",data)
+                
                 dispatch(setGames(data))
             })
             .catch(err => console.log('err', err))

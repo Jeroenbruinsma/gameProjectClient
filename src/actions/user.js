@@ -1,4 +1,5 @@
 import request from 'superagent'
+import {baseUrl} from '../constants'
 
 export const USER_SIGNUP = 'USER_SIGNUP'
 export const USER_SIGNUP_FAIL = 'USER_SIGNUP_FAIL'
@@ -32,13 +33,6 @@ export const winner = (data) => {
 }
 
 
-
-
-//const baseUrl = 'http://localhost:3001'
-//const baseUrl = 'http://localhost:5000' // link for Jeroen
-const baseUrl = 'https://fast-hamlet-62013.herokuapp.com/:40623' // link for heroku
-
-
 export const signup = (username, password, name, email, password_confirmation) => (dispatch) => {
 
     request
@@ -59,11 +53,11 @@ export const signup = (username, password, name, email, password_confirmation) =
 
 
 
-export const winnerUser = (winnerId) => (dispatch) => {
-
+export const winnerUser = (gameId) => (dispatch) => {
+    //console.log("winneruser action ", gameId)
     request
-        .get(`${baseUrl}/user`)
-        .send({ winnerId })
+        .put(`${baseUrl}/user`)
+        .send({ gameId })
         .then(
             res => {
                 console.log("result from winner action" , res.body.winner)

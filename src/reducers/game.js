@@ -1,5 +1,5 @@
 
-import { SET_GAMES, ADD_GAME, CLEAR_EVENT } from '../actions/game'
+import { SET_GAMES, ADD_GAME } from '../actions/game'
 
 
   export default function game(state = {}, action = {}) {
@@ -7,7 +7,11 @@ import { SET_GAMES, ADD_GAME, CLEAR_EVENT } from '../actions/game'
     //console.log("reducer for Games state", state)
         switch (action.type) {
             case SET_GAMES:
-                return action.games
+
+                    const Lobby = action.games.Lobby.map(item => {
+                        return {id: item.id, gameName: item.gameName, status: item.status}
+                    })
+                return {Lobby}
             case ADD_GAME:
                 return [...state.Lobby]
             

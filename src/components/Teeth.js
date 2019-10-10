@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './game.css'
 import request from 'superagent'
+import { baseUrl } from '../constants'
 
 
 export default class Teeth extends Component {
@@ -10,15 +11,12 @@ export default class Teeth extends Component {
 
     getImage = () => this.state.open ? 'tooth' : 'hole'
 
-    //url = 'http://localhost:5000'
-    url = 'https://fast-hamlet-62013.herokuapp.com/:40623'
-    
     onChange = (event) => {
         console.log('toothclicked!', event.target.id)
         event.preventDefault()
 
         request
-            .put(this.url + '/teeth')
+            .put(baseUrl + '/teeth')
             .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
             .send({ teethId: event.target.id })
             .then(response => {
@@ -37,8 +35,9 @@ export default class Teeth extends Component {
             q = "hole.png"
           }
         return (
-            <div className={this.props.cssLocation}>
-                <img Toothid={this.props.teethproperty.id} id={this.props.teethproperty.id} src={q} onClick={this.onChange} alt='tooth1' className="toothimg" />
+            <div className={this.props.cssLocation} >
+                <img  id={this.props.teethproperty.id} key={this.props.teethproperty.id} src={q} onClick={this.onChange} alt='tooth1' className="toothimg" />
+                {/* <img Toothid={this.props.teethproperty.id} id={this.props.teethproperty.id} key={this.props.teethproperty.id} src={q} onClick={this.onChange} alt='tooth1' className="toothimg" /> */}
 
             </div>
         )
