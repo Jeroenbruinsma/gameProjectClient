@@ -143,3 +143,32 @@ main{
     left: 40%;
     background-color: rgba(0, 0, 0, 0.44);
 }
+
+
+#UserOk{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+.UserOk{
+    position: absolute;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    width: 36%;
+
+    z-index: 6;
+    max-width: 34%;
+    display: block;
+    bottom: 45%;
+    left: 40%;
+    background-color: rgba(0, 0, 0, 0.44);
+}
+
+#Winnermess{
+    position: relative;
+    font-size: 2rem;
+    color: white;
+}

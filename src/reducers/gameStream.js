@@ -1,5 +1,5 @@
 
-import { EVENT } from '../actions/gameStream'
+import { EVENT, CLEAR_EVENT } from '../actions/gameStream'
 
 
 export default function users(state = [], action = {}) {
@@ -9,6 +9,8 @@ export default function users(state = [], action = {}) {
                 GameInfo: action.payload.GameInfo,
                 teeth: action.payload.ToothInMout
             }
+        case CLEAR_EVENT:
+            return {}
 
         default:
             return state

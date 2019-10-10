@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import './GameLobby.css'
 import { connect } from 'react-redux'
 import { fetchGames, saveGame } from '../actions/game'
+import { clearGameState } from '../actions/gameStream'
+
 import request from 'superagent'
 import LobbyButton from './LobbyButton';
 import { Redirect } from 'react-router-dom'
+import { baseUrl } from '../constants'
 
 
 class GameLobby extends Component {
@@ -19,8 +22,8 @@ class GameLobby extends Component {
     }
 
     componentDidMount() {
-        console.log('this?props?', this.props)
         this.props.fetchGames()
+        this.props.clearGameState()
     }
 
 
@@ -41,19 +44,19 @@ class GameLobby extends Component {
 
 
     clickable = (event) => {
-        console.log('clicklable means you can join the game', event.target.id)
         request
-            .get(this.url + `/lobby/${event.target.id}`)
+            .get(baseUrl + `/lobby/${event.target.id}`)
             .set('Authorization', 'Bearer ' + localStorage.getItem("token"))
             .send({ "id": event.target.id })
             .then(response => {
-                console.log('response.body', response.body)
+                //console.log('response.body', response.body)
                 if (response.body.JoinGame) {
                     localStorage.setItem('gamePlayId', response.body.JoinGame)
                     this.setState({ redir: true })
                 }
                 if (response.body.command) {
                     this.props.fetchGames()
+                    this.props.clearGameState()
                 }
 
             })
@@ -62,14 +65,13 @@ class GameLobby extends Component {
     }
 
 
-    url = 'http://localhost:5000'
-
 
     renderTableData() {
         if (!this.props.games.Lobby) {
-            return "wating"
+            return "waiting"
         }
         let x = this.props.games.Lobby
+
 
         return x.map(game => {
             const { id, gameName, gameDetail, status } = game
@@ -78,39 +80,45 @@ class GameLobby extends Component {
                 <tr key={id} >
                     <td>{id}</td>
                     <td>{gameName}</td>
-                    <td>{gameDetail}</td>
+                    {/* <td>{gameDetail}</td> */}
                     <td>{status}</td>
                     <td><LobbyButton id={id}/></td>
                 </tr>
 
             )
-        }
-        )
+        })
     }
     renderTableHeader() {
-        console.log('header', this.state.games)
-        let header = Object.keys(this.state.games[0])
-        return header.map((key, index) => {
-            return <th property={key}>{key.toUpperCase()}</th>
-        })
+        if (!this.props.games.Lobby) {
+            return "wait"
+        }
+        if (this.props.games.Lobby.length > 0) {
+            let header = Object.keys(this.props.games.Lobby[0])
+            header.push('Join')
+            return header.map((key, index) => {
+                return <th property={key} key={key}>{key.toUpperCase()}</th>
+            })
+        }
     }
 
     render() {
 
-        console.log("render of the lobby:", this.state)
         if (this.state.redir) {
             return <Redirect to='/game' />
         }
 
         return (
             <div>
-                <h1 id='title'>Game Lobby</h1>
-                <table id='games'>
-                    <tbody>
-                        {this.renderTableHeader()}
-                        {this.renderTableData()}
-                    </tbody>
-                </table>
+                <div>
+                    <h1 id='title'>Game Lobby</h1>
+                    <table id='games'>
+                        <tbody>
+                            {this.renderTableHeader()}
+                            {this.renderTableData()}
+                        </tbody>
+                    </table>
+                </div>
+
                 <form id="newGame">
                     <label id="newgame"> Name for a new game: </label>
                     <input
@@ -135,9 +143,8 @@ const mapStateToProps = (state) => {
 }
 
 
-const mapDispatchToProps = { fetchGames, saveGame }
 
 
 export default connect(mapStateToProps,
     mapDispatchToProps
-)(GameLobby)
+)(GameLobby) 

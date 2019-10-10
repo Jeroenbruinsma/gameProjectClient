@@ -1,4 +1,5 @@
 import request from 'superagent'
+import {baseUrl} from '../constants'
 
 export const PLAYER_LOGIN= 'PLAYER_LOGIN'
 
@@ -8,11 +9,9 @@ export const playerLogIn = (login) => {
     payload: login
 }}
 
-const baseUrl = 'http://localhost:5000'
 
 
 export const login = (email, password) => dispatch => {
-    console.log('test5', email)
     request
         .post(`${baseUrl}/login`)
         .send({ email, password })

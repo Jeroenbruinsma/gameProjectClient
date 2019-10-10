@@ -1,4 +1,5 @@
 import request from 'superagent'
+import {baseUrl} from '../constants'
 
 export const STOP_GAME = 'STOP_GAME'
 export const SET_GAMES = 'SET_GAMES'
@@ -19,10 +20,9 @@ export const stopGame = (stop) => {
     }
 }
 
-const baseUrl = 'http://localhost:5000'
+
 
 export function fetchGames() {
-    console.log("tokennnnnnnnnn", localStorage.getItem("token"))
     return dispatch => {
         request
             .get(`${baseUrl}/lobby`)
@@ -33,6 +33,8 @@ export function fetchGames() {
                 return res.body
             })
             .then(data => {
+                //console.log("DATADAT is ",data)
+                
                 dispatch(setGames(data))
             })
             .catch(err => console.log('err', err))
@@ -40,7 +42,6 @@ export function fetchGames() {
 }
 
 export function saveGame(data) {
-    console.log("saveGameCalled to add a game to the list ", data)
     return dispatch => {
         request
             .post(`${baseUrl}/game`)
@@ -55,10 +56,3 @@ export function saveGame(data) {
     }
 }
 
-
-// const tooth1 = document.getElementById("");
-// tooth1.onclick = function () {
-//     console.log(" id pressed")
-//     img = this.getElementsByClassName("img")
-//     img[0].src = "hole.png"
-// };
