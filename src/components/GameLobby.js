@@ -5,6 +5,7 @@ import { fetchGames, saveGame } from '../actions/game'
 import { clearGameState } from '../actions/gameStream'
 
 import request from 'superagent'
+import LobbyButton from './LobbyButton';
 import { Redirect } from 'react-router-dom'
 import { baseUrl } from '../constants'
 
@@ -29,6 +30,7 @@ class GameLobby extends Component {
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
+
         })
     }
 
@@ -62,7 +64,7 @@ class GameLobby extends Component {
 
     }
 
-   
+
 
     renderTableData() {
         if (!this.props.games.Lobby) {
@@ -80,7 +82,7 @@ class GameLobby extends Component {
                     <td>{gameName}</td>
                     {/* <td>{gameDetail}</td> */}
                     <td>{status}</td>
-                    <td> <button id={id} onClick={this.clickable}>JOIN</button></td>
+                    <td><LobbyButton id={id}/></td>
                 </tr>
 
             )
@@ -140,7 +142,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { fetchGames, saveGame, clearGameState }
+
+
 
 export default connect(mapStateToProps,
     mapDispatchToProps

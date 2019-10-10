@@ -12,13 +12,12 @@ function App() {
 
     <BrowserRouter>
     <div>
-      
       <Switch>
-        <Route path='/user' component={SignUpContainer} />
+        <Route exact path='/' component={SignUpContainer} />
         <Route path='/login' component={PlayerContainer} />
         <Route exact path='/lobby' component={GameLobbyContainer} />
         <Route exact path='/game' component={GameContainerStream} />
-        <Route exact path='/' component={PlayerContainer} />
+        
       </Switch>
     </div>
     </BrowserRouter>
